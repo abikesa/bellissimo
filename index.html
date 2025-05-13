@@ -193,13 +193,13 @@
 </head>
 <body>
   <div class="top-left">
-    <div class="menu-icon" id="gridToggle">
+    <div class="menu-icon" id="gridToggle" role="button" aria-label="Open navigation menu" tabindex="0">
       <div></div><div></div><div></div>
       <div></div><div></div><div></div>
       <div></div><div></div><div></div>
     </div>
-  </div>
-
+  </div> <!-- <- This was missing -->
+  
   <div class="top-right">
     <button id="toggle-theme">🌞 / 🌙</button>
   </div>
@@ -250,6 +250,13 @@
       menu.style.display = menu.style.display === 'grid' ? 'none' : 'grid';
     });
 
+    toggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle.click();
+      }
+    });
+    
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && !toggle.contains(e.target)) {
         menu.style.display = 'none';
